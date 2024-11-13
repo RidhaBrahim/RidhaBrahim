@@ -231,21 +231,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var pauseTime = 0;
 	        var substr = curString.substr(curStrPos);
 	        // check for an escape character before a pause value
-	        // format: \^\d+ .. eg: ^1000 .. should be able to print the ^ too using ^^
-	        // single ^ are removed from string
-	        if (substr.charAt(0) === '^') {
-	          if (/^\^\d+/.test(substr)) {
-	            var skip = 1; // skip at least 1
-	            substr = /\d+/.exec(substr)[0];
-	            skip += substr.length;
-	            pauseTime = parseInt(substr);
-	            _this2.temporaryPause = true;
-	            _this2.options.onTypingPaused(_this2.arrayPos, _this2);
-	            // strip out the escape character and pause value so they're not printed
-	            curString = curString.substring(0, curStrPos) + curString.substring(curStrPos + skip);
-	            _this2.toggleBlinking(true);
-	          }
-	        }
+// format: \^\d+ .. eg: ^1000 .. should be able to print the ^ too using ^^
+// single ^ are removed from string
+if (substr.charAt(0) === '^') {
+	if (/^\^\d+/.test(substr)) {
+	  var skip = 1; // skip at least 1
+	  substr = /\d+/.exec(substr)[0];
+	  skip += substr.length;
+	  pauseTime = parseInt(substr);
+	  this.temporaryPause = true;
+	  this.options.onTypingPaused(this.arrayPos, this);
+	  // strip out the escape character and pause value so they're not printed
+	  curString = curString.substring(0, curStrPos) + curString.substring(curStrPos + skip);
+	  this.toggleBlinking(true);
+	}
+  }
 	
 	        // check for skip characters formatted as
 	        // "this is a `string to print NOW` ..."
